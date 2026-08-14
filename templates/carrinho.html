@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Carrinho - Seu Style</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>Seu Style</h1>
+
+    <h2>Meu Carrinho</h2>
+
+
+    {% if carrinho %}
+
+        {% for produto in carrinho %}
+
+            <div class="produto">
+
+                <h3>{{ produto.nome }}</h3>
+
+                <p>
+                    Preço:
+                    R$ {{ "%.2f"|format(produto.preco) }}
+                </p>
+
+                <p>
+                    Quantidade:
+                    {{ produto.quantidade }}
+                </p>
+
+                <p>
+                    Subtotal:
+                    R$ {{ "%.2f"|format(produto.preco * produto.quantidade) }}
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+
+        <h2>
+            Total:
+            R$ {{ "%.2f"|format(total) }}
+        </h2>
+
+
+    {% else %}
+
+        <p>Seu carrinho está vazio.</p>
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="/">
+        <button>Voltar para produtos</button>
+    </a>
+
+
+</body>
+
+</html>

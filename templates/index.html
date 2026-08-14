@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Seu Style</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>Seu Style</h1>
+
+    <p>Loja de roupas</p>
+
+    <hr>
+
+    <h2>Produtos</h2>
+
+
+    {% for produto in produtos %}
+
+    <div class="produto">
+
+        <img
+            src="{{ url_for('static', filename='imagens/' + produto.imagem) }}"
+            width="150"
+        >
+
+        <h3>{{ produto.nome }}</h3>
+
+        <p>R$ {{ "%.2f"|format(produto.preco) }}</p>
+
+        <a href="/comprar/{{ produto.id }}">
+    <button>Comprar</button>
+</a>
+
+    </div>
+
+    {% endfor %}
+
+    <br><br>
+
+<a href="/carrinho">
+    <button>Ver carrinho</button>
+</a>
+
+</body>
+
+</html>
