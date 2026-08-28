@@ -2,52 +2,59 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
 
     <title>Seu Style</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 
 <body>
 
-    <h1>Seu Style</h1>
+    <header>
+        <h1>Seu Style</h1>
 
-    <p>Loja de roupas</p>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/carrinho">Carrinho</a>
+        </nav>
+    </header>
 
-    <hr>
+    <main>
 
-    <h2>Produtos</h2>
+        <section class="titulo">
+            <h2>Bem-vindo à Seu Style!</h2>
+            <p>Encontre roupas que combinam com o seu estilo.</p>
+        </section>
 
+        <section class="produtos">
 
-    {% for produto in produtos %}
+            {% for produto in produtos %}
 
-    <div class="produto">
+            <div class="produto">
 
-        <img
-            src="{{ url_for('static', filename='imagens/' + produto.imagem) }}"
-            width="150"
-        >
+                <img
+                    src="{{ url_for('static', filename='imagens/' + produto.imagem) }}"
+                    alt="{{ produto.nome }}"
+                >
 
-        <h3>{{ produto.nome }}</h3>
+                <h3>{{ produto.nome }}</h3>
 
-        <p>R$ {{ "%.2f"|format(produto.preco) }}</p>
+                <p class="preco">
+                    R$ {{ "%.2f"|format(produto.preco) }}
+                </p>
 
-        <a href="/comprar/{{ produto.id }}">
-    <button>Comprar</button>
-</a>
+                <a href="/comprar/{{ produto.id }}">
+                    <button>Comprar</button>
+                </a>
 
-    </div>
+            </div>
 
-    {% endfor %}
+            {% endfor %}
 
-    <br><br>
+        </section>
 
-<a href="/carrinho">
-    <button>Ver carrinho</button>
-</a>
+    </main>
 
 </body>
 

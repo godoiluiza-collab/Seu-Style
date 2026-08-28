@@ -2,69 +2,53 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Carrinho - Seu Style</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <title>Cadastro - Seu Style</title>
 </head>
 
 <body>
 
-    <h1>Seu Style</h1>
+    <h1>Cadastro de Cliente</h1>
 
-    <h2>Meu Carrinho</h2>
+    <form>
 
+        <label>Nome:</label>
+        <br>
+        <input type="text" name="nome">
 
-    {% if carrinho %}
+        <br><br>
 
-        {% for produto in carrinho %}
+        <label>CPF:</label>
+        <br>
+        <input type="text" name="cpf">
 
-            <div class="produto">
+        <br><br>
 
-                <h3>{{ produto.nome }}</h3>
+        <label>E-mail:</label>
+        <br>
+        <input type="email" name="email">
 
-                <p>
-                    Preço:
-                    R$ {{ "%.2f"|format(produto.preco) }}
-                </p>
+        <br><br>
 
-                <p>
-                    Quantidade:
-                    {{ produto.quantidade }}
-                </p>
+        <label>Telefone:</label>
+        <br>
+        <input type="text" name="telefone">
 
-                <p>
-                    Subtotal:
-                    R$ {{ "%.2f"|format(produto.preco * produto.quantidade) }}
-                </p>
+        <br><br>
 
-            </div>
+        <label>Endereço:</label>
+        <br>
+        <input type="text" name="endereco">
 
-        {% endfor %}
+        <br><br>
 
+        <button type="submit">Cadastrar</button>
 
-        <h2>
-            Total:
-            R$ {{ "%.2f"|format(total) }}
-        </h2>
-
-
-    {% else %}
-
-        <p>Seu carrinho está vazio.</p>
-
-    {% endif %}
-
+    </form>
 
     <br>
 
-    <a href="/">
-        <button>Voltar para produtos</button>
-    </a>
-
+    <a href="/">Voltar para a loja</a>
 
 </body>
 

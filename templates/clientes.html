@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - Seu Style</title>
+</head>
+
+<body>
+
+    <h1>Clientes cadastrados</h1>
+
+    {% if clientes %}
+
+        {% for cliente in clientes %}
+
+            <div>
+
+                <h2>{{ cliente["nome"] }}</h2>
+
+                <p>
+                    CPF: {{ cliente["cpf"] }}
+                </p>
+
+                <p>
+                    E-mail: {{ cliente["email"] }}
+                </p>
+
+                <p>
+                    Telefone: {{ cliente["telefone"] }}
+                </p>
+
+                <p>
+                    Endereço: {{ cliente["endereco"] }}
+                </p>
+
+                <hr>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Nenhum cliente cadastrado.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="/cadastro">
+        Cadastrar novo cliente
+    </a>
+
+    <br><br>
+
+    <a href="/">
+        Voltar para a loja
+    </a>
+
+</body>
+
+</html>
