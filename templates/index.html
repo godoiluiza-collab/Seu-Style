@@ -13,11 +13,12 @@
 
     <header>
         <h1>Seu Style</h1>
-
-        <nav>
-            <a href="/">Início</a>
-            <a href="/carrinho">Carrinho</a>
-        </nav>
+<nav>
+    <a href="/">Início</a>
+    <a href="/carrinho">Carrinho</a>
+    <a href="/cadastro">Cadastro</a>
+    <a href="/clientes">Clientes Cadastrados</a>
+</nav>
     </header>
 
     <main>
@@ -43,11 +44,29 @@
                 <p class="preco">
                     R$ {{ "%.2f"|format(produto.preco) }}
                 </p>
+        {% if produto.estoque > 0 %}
 
-                <a href="/comprar/{{ produto.id }}">
-                    <button>Comprar</button>
-                </a>
+    <p>
+        📦 Estoque: {{ produto.estoque }} unidades
+    </p>
 
+    <a href="/comprar/{{ produto.id }}">
+        <button>Comprar</button>
+    </a>
+
+{% else %}
+
+    <p>
+        ❌ Produto esgotado
+    </p>
+
+    <button disabled>
+        Indisponível
+    </button>
+
+{% endif %}
+
+            
             </div>
 
             {% endfor %}

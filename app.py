@@ -6,9 +6,10 @@ app = Flask(__name__)
 def conectar_banco():
     conexao = pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};"
-        "SERVER=d0fb34fd4dfe;"
+        "SERVER=sqlexpress;"
         "DATABASE=SeuStyle;"
-        "Trusted_Connection=yes;"
+        "UID=aluno;"
+        "PWD=aluno;"
     )
 
     return conexao
@@ -58,28 +59,44 @@ def inicio():
 @app.route("/comprar/<int:id>")
 def comprar(id):
 
+    produtos = buscar_produtos()
+
     for produto in produtos:
 
         if produto["id"] == id:
 
-            encontrado = False
+            conexao = conectar_banco()
+            cursor = conexao.cursor()
 
-            for item in carrinho:
+            cursor.execute("""
+                UPDATE Produtos
+                SET estoque = estoque - 1
+                WHERE id = ? AND estoque > 0
+            """, id)
 
-                if item["id"] == id:
-                    item["quantidade"] += 1
-                    encontrado = True
-                    break
+            if cursor.rowcount == 1:
 
-            if not encontrado:
-                novo_item = produto.copy()
-                novo_item["quantidade"] = 1
-                carrinho.append(novo_item)
+                conexao.commit()
+
+                encontrado = False
+
+                for item in carrinho:
+
+                    if item["id"] == id:
+                        item["quantidade"] += 1
+                        encontrado = True
+                        break
+
+                if not encontrado:
+                    novo_item = produto.copy()
+                    novo_item["quantidade"] = 1
+                    carrinho.append(novo_item)
+
+            conexao.close()
 
             break
 
     return redirect("/carrinho")
-
 
 @app.route("/carrinho")
 def ver_carrinho():

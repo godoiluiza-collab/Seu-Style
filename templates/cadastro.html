@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Carrinho - Seu Style</title>
+    <title>Cadastro - Seu Style</title>
 
     <style>
         body {
@@ -18,137 +18,83 @@
             color: #0b1f3a;
         }
 
-        .carrinho {
-            max-width: 800px;
+        .cadastro {
+            max-width: 500px;
             margin: auto;
-        }
-
-        .produto {
             background-color: white;
-            padding: 20px;
-            margin-bottom: 15px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 2px 6px #ccc;
         }
 
-        .produto h2 {
+        label {
+            display: block;
+            margin-top: 12px;
             color: #0b1f3a;
         }
 
-        .quantidade {
-            margin-top: 15px;
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
         }
 
-        .botao {
-            display: inline-block;
-            padding: 8px 14px;
-            margin: 5px;
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
             background-color: #0b1f3a;
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
-        .botao:hover {
+        button:hover {
             background-color: #163b6d;
         }
 
-        .remover {
-            background-color: #b00020;
-        }
-
-        .total {
-            background-color: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            text-align: right;
-        }
-
-        .total h2 {
-            color: #0b1f3a;
-        }
-
         .voltar {
-            display: block;
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
+        }
+
+        .voltar a {
+            color: #0b1f3a;
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>🛒 Meu Carrinho</h1>
+    <h1>Cadastro de Cliente</h1>
 
-    <div class="carrinho">
+    <div class="cadastro">
 
-        {% if carrinho %}
+        <form action="/cadastrar" method="POST">
 
-            {% for produto in carrinho %}
+            <label>Nome:</label>
+            <input type="text" name="nome" required>
 
-                <div class="produto">
+            <label>CPF:</label>
+            <input type="text" name="cpf" required>
 
-                    <h2>{{ produto.nome }}</h2>
+            <label>Email:</label>
+            <input type="email" name="email" required>
 
-                    <p>Preço: R$ {{ "%.2f"|format(produto.preco) }}</p>
+            <label>Telefone:</label>
+            <input type="text" name="telefone" required>
 
-                    <div class="quantidade">
+            <label>Endereço:</label>
+            <input type="text" name="endereco" required>
 
-                        <strong>Quantidade:</strong>
+            <button type="submit">Cadastrar</button>
 
-                        <a class="botao"
-                           href="/diminuir/{{ produto.id }}">
-                            −
-                        </a>
-
-                        <strong>{{ produto.quantidade }}</strong>
-
-                        <a class="botao"
-                           href="/aumentar/{{ produto.id }}">
-                            +
-                        </a>
-
-                    </div>
-
-                    <p>
-                        <strong>
-                            Subtotal:
-                            R$ {{ "%.2f"|format(produto.subtotal) }}
-                        </strong>
-                    </p>
-
-                    <a class="botao remover"
-                       href="/remover/{{ produto.id }}">
-                        🗑️ Remover
-                    </a>
-
-                </div>
-
-            {% endfor %}
-
-            <div class="total">
-
-                <h2>
-                    Total:
-                    R$ {{ "%.2f"|format(total) }}
-                </h2>
-
-            </div>
-
-        {% else %}
-
-            <div class="produto">
-                <h2>Seu carrinho está vazio 😢</h2>
-                <p>Adicione alguns produtos para começar sua compra!</p>
-            </div>
-
-        {% endif %}
+        </form>
 
         <div class="voltar">
-            <a class="botao" href="/">
-                ← Continuar comprando
-            </a>
+            <a href="/">← Voltar para a loja</a>
         </div>
 
     </div>

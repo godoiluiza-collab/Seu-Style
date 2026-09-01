@@ -4,59 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Clientes - Seu Style</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b1f3a;
+        }
+
+        .clientes {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .cliente {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #ccc;
+        }
+
+        .cliente h2 {
+            color: #0b1f3a;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #0b1f3a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .botao:hover {
+            background-color: #163b6d;
+        }
+
+        .voltar {
+            text-align: center;
+            margin-top: 25px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Clientes cadastrados</h1>
+    <h1>👥 Clientes Cadastrados</h1>
 
-    {% if clientes %}
+    <div class="clientes">
 
-        {% for cliente in clientes %}
+        {% if clientes %}
 
-            <div>
+            {% for cliente in clientes %}
 
-                <h2>{{ cliente["nome"] }}</h2>
+                <div class="cliente">
 
-                <p>
-                    CPF: {{ cliente["cpf"] }}
-                </p>
+                    <h2>{{ cliente.nome }}</h2>
 
-                <p>
-                    E-mail: {{ cliente["email"] }}
-                </p>
+                    <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
 
-                <p>
-                    Telefone: {{ cliente["telefone"] }}
-                </p>
+                    <p><strong>Email:</strong> {{ cliente.email }}</p>
 
-                <p>
-                    Endereço: {{ cliente["endereco"] }}
-                </p>
+                    <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
 
-                <hr>
+                    <p><strong>Endereço:</strong> {{ cliente.endereco }}</p>
 
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="cliente">
+                <h2>Nenhum cliente cadastrado.</h2>
             </div>
 
-        {% endfor %}
+        {% endif %}
 
-    {% else %}
+        <div class="voltar">
 
-        <p>Nenhum cliente cadastrado.</p>
+            <a class="botao" href="/">
+                ← Voltar para a loja
+            </a>
 
-    {% endif %}
+        </div>
 
-    <br>
-
-    <a href="/cadastro">
-        Cadastrar novo cliente
-    </a>
-
-    <br><br>
-
-    <a href="/">
-        Voltar para a loja
-    </a>
+    </div>
 
 </body>
 
