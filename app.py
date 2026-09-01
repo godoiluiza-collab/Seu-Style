@@ -2,46 +2,58 @@ from flask import Flask, render_template, redirect, request
 import pyodbc
 
 app = Flask(__name__)
+
 def conectar_banco():
     conexao = pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};"
-        "SERVER=localhost\\sqlexpress;"
+        "SERVER=d0fb34fd4dfe;"
         "DATABASE=SeuStyle;"
         "Trusted_Connection=yes;"
     )
 
     return conexao
-
+    
 carrinho = []
 clientes = []
 
 
-produtos = [
-    {
-        "id": 1,
-        "nome": "Camiseta",
-        "preco": 50.00,
-        "imagem": "camiseta.jpg"
-    },
-    {
-        "id": 2,
-        "nome": "Calça Jeans",
-        "preco": 120.00,
-        "imagem": "calca.jpg"
-    },
-    {
-        "id": 3,
-        "nome": "Moletom",
-        "preco": 90.00,
-        "imagem": "moletom.jpg"
-    }
-]
+def buscar_produtos():
 
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT id, nome, preco, categoria, estoque, imagem
+        FROM Produtos
+    """)
+
+    produtos = []
+
+    for produto in cursor.fetchall():
+
+        produtos.append({
+            "id": produto.id,
+            "nome": produto.nome,
+            "preco": float(produto.preco),
+            "categoria": produto.categoria,
+            "estoque": produto.estoque,
+            "imagem": produto.imagem
+        })
+
+    cursor.close()
+    conexao.close()
+
+    return produtos
 
 @app.route("/")
 def inicio():
-    return render_template("index.html", produtos=produtos)
 
+    produtos = buscar_produtos()
+
+    return render_template(
+        "index.html",
+        produtos=produtos
+    )
 
 @app.route("/comprar/<int:id>")
 def comprar(id):

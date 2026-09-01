@@ -3,57 +3,155 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro - Seu Style</title>
+    <title>Carrinho - Seu Style</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b1f3a;
+        }
+
+        .carrinho {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .produto {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #ccc;
+        }
+
+        .produto h2 {
+            color: #0b1f3a;
+        }
+
+        .quantidade {
+            margin-top: 15px;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 5px;
+            background-color: #0b1f3a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .botao:hover {
+            background-color: #163b6d;
+        }
+
+        .remover {
+            background-color: #b00020;
+        }
+
+        .total {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: right;
+        }
+
+        .total h2 {
+            color: #0b1f3a;
+        }
+
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Seu Style</h1>
+    <h1>🛒 Meu Carrinho</h1>
 
-        <nav>
-            <a href="/">Início</a>
-            <a href="/carrinho">Carrinho</a>
-            <a href="/clientes">Clientes</a>
-        </nav>
-    </header>
+    <div class="carrinho">
 
-    <main>
+        {% if carrinho %}
 
-        <section class="cadastro">
+            {% for produto in carrinho %}
 
-            <h2>Cadastro de Cliente</h2>
+                <div class="produto">
 
-            <form action="/cadastrar" method="POST">
+                    <h2>{{ produto.nome }}</h2>
 
-                <label>Nome:</label>
-                <input type="text" name="nome" required>
+                    <p>Preço: R$ {{ "%.2f"|format(produto.preco) }}</p>
 
-                <label>CPF:</label>
-                <input type="text" name="cpf" required>
+                    <div class="quantidade">
 
-                <label>E-mail:</label>
-                <input type="email" name="email" required>
+                        <strong>Quantidade:</strong>
 
-                <label>Telefone:</label>
-                <input type="text" name="telefone" required>
+                        <a class="botao"
+                           href="/diminuir/{{ produto.id }}">
+                            −
+                        </a>
 
-                <label>Endereço:</label>
-                <input type="text" name="endereco" required>
+                        <strong>{{ produto.quantidade }}</strong>
 
-                <button type="submit">Cadastrar</button>
+                        <a class="botao"
+                           href="/aumentar/{{ produto.id }}">
+                            +
+                        </a>
 
-            </form>
+                    </div>
 
-            <br>
+                    <p>
+                        <strong>
+                            Subtotal:
+                            R$ {{ "%.2f"|format(produto.subtotal) }}
+                        </strong>
+                    </p>
 
-            <a href="/">Voltar para a loja</a>
+                    <a class="botao remover"
+                       href="/remover/{{ produto.id }}">
+                        🗑️ Remover
+                    </a>
 
-        </section>
+                </div>
 
-    </main>
+            {% endfor %}
+
+            <div class="total">
+
+                <h2>
+                    Total:
+                    R$ {{ "%.2f"|format(total) }}
+                </h2>
+
+            </div>
+
+        {% else %}
+
+            <div class="produto">
+                <h2>Seu carrinho está vazio 😢</h2>
+                <p>Adicione alguns produtos para começar sua compra!</p>
+            </div>
+
+        {% endif %}
+
+        <div class="voltar">
+            <a class="botao" href="/">
+                ← Continuar comprando
+            </a>
+        </div>
+
+    </div>
 
 </body>
 
