@@ -12,69 +12,146 @@
 <body>
 
     <header>
-        <h1>Seu Style</h1>
-<nav>
-    <a href="/">Início</a>
-    <a href="/carrinho">Carrinho</a>
-    <a href="/cadastro">Cadastro</a>
-    <a href="/clientes">Clientes Cadastrados</a>
-</nav>
+
+        <div class="logo-area">
+
+            <img
+                src="{{ url_for('static', filename='imagens/logo.png') }}"
+                alt="Logo Seu Style"
+            >
+
+            <div>
+                <h1>Seu Style</h1>
+                <p>Moda que combina com você</p>
+            </div>
+
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/carrinho">🛒 Carrinho</a>
+            <a href="/cadastro">👤 Cadastro</a>
+            <a href="/clientes">👥 Clientes</a>
+            <a href="/estoque">📦 Estoque</a>
+        </nav>
+
     </header>
+
 
     <main>
 
+        <!-- Apresentação -->
         <section class="titulo">
-            <h2>Bem-vindo à Seu Style!</h2>
-            <p>Encontre roupas que combinam com o seu estilo.</p>
+
+            <h2>Bem-vindo à Seu Style! 👕</h2>
+
+            <p>
+                Encontre roupas que combinam com o seu estilo.
+            </p>
+
+            <p>
+                Confira nossos produtos e escolha o seu favorito!
+            </p>
+
         </section>
 
+
+        <!-- Produtos -->
         <section class="produtos">
 
             {% for produto in produtos %}
 
             <div class="produto">
 
-                <img
-                    src="{{ url_for('static', filename='imagens/' + produto.imagem) }}"
-                    alt="{{ produto.nome }}"
-                >
+                <div class="imagem-produto">
 
-                <h3>{{ produto.nome }}</h3>
+                    <img
+                        src="{{ url_for('static', filename='imagens/' + produto.imagem) }}"
+                        alt="{{ produto.nome }}"
+                    >
 
-                <p class="preco">
-                    R$ {{ "%.2f"|format(produto.preco) }}
-                </p>
-        {% if produto.estoque > 0 %}
+                </div>
 
-    <p>
-        📦 Estoque: {{ produto.estoque }} unidades
-    </p>
 
-    <a href="/comprar/{{ produto.id }}">
-        <button>Comprar</button>
-    </a>
+                <div class="informacoes-produto">
 
-{% else %}
+                    <h3>
+                        {{ produto.nome }}
+                    </h3>
 
-    <p>
-        ❌ Produto esgotado
-    </p>
+                    <p class="categoria">
+                        {{ produto.categoria }}
+                    </p>
 
-    <button disabled>
-        Indisponível
-    </button>
+                    <p class="preco">
+                        R$ {{ "%.2f"|format(produto.preco) }}
+                    </p>
 
-{% endif %}
 
-            
+                    {% if produto.estoque > 0 %}
+
+                        <p class="disponivel">
+                            ✓ Disponível
+                        </p>
+
+                        <a href="/comprar/{{ produto.id }}">
+                            <button>
+                                🛒 Comprar
+                            </button>
+                        </a>
+
+                    {% else %}
+
+                        <p class="esgotado">
+                            ✕ Produto esgotado
+                        </p>
+
+                        <button class="indisponivel" disabled>
+                            Indisponível
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
             </div>
 
             {% endfor %}
 
         </section>
 
+
+        <!-- Caso não existam produtos -->
+        {% if not produtos %}
+
+        <section class="titulo">
+
+            <h2>Nenhum produto disponível</h2>
+
+            <p>
+                No momento não temos produtos cadastrados.
+            </p>
+
+        </section>
+
+        {% endif %}
+
     </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Seu Style
+        </p>
+
+        <p>
+            Moda que combina com você.
+        </p>
+
+    </footer>
 
 </body>
 
 </html>
+

@@ -1,34 +1,340 @@
-body{
-    font-family: Arial;
-    background-color: #f5f5f5;
-    text-align: center;
+/* Configuração geral */
+
+* {
+    box-sizing: border-box;
 }
 
-h1{
-    color: #ff4d6d;
-}
-
-.produto{
-    background-color: white;
-    width: 200px;
-    padding: 15px;
-    margin: 20px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-.produto img{
-    border-radius: 10px;
-}
-
-button{
-    background-color: #ff4d6d;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #080b12;
     color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
 }
 
-button:hover{
-    background-color: #e63956;
+
+/* Cabeçalho */
+
+header {
+    background-color: #071a36;
+    padding: 18px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 2px solid #e3262e;
 }
+
+
+/* Logo */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-area img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.logo-area h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.logo-area p {
+    margin: 5px 0 0;
+    color: #b8c2d1;
+}
+
+
+/* Menu */
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+
+    padding: 10px 14px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background-color: #e3262e;
+}
+
+
+/* Conteúdo principal */
+
+main {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 35px 0 50px;
+}
+
+
+/* Título */
+
+.titulo {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.titulo h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.titulo p {
+    color: #b8c2d1;
+    font-size: 17px;
+    margin: 6px;
+}
+
+
+/* Área dos produtos */
+
+.produtos {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* Card do produto */
+
+.produto {
+    background-color: #111722;
+
+    border: 1px solid #26344d;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+
+    border-color: #e3262e;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Imagem do produto */
+
+.imagem-produto {
+    width: 100%;
+    height: 260px;
+
+    background-color: #0d111a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem-produto img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.3s;
+}
+
+.produto:hover .imagem-produto img {
+    transform: scale(1.03);
+}
+
+
+/* Informações */
+
+.informacoes-produto {
+    padding: 20px;
+}
+
+.informacoes-produto h3 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+}
+
+
+.categoria {
+    color: #8f9bad;
+
+    margin: 0 0 12px;
+
+    font-size: 14px;
+}
+
+
+.preco {
+    color: #ffffff;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin: 10px 0;
+}
+
+
+/* Produto disponível */
+
+.disponivel {
+    color: #45d483;
+
+    font-size: 14px;
+
+    margin: 10px 0;
+}
+
+
+/* Produto esgotado */
+
+.esgotado {
+    color: #e3262e;
+
+    font-size: 14px;
+
+    margin: 10px 0;
+}
+
+
+/* Botão comprar */
+
+.informacoes-produto a {
+    text-decoration: none;
+}
+
+.informacoes-produto button {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #e3262e;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.informacoes-produto button:hover {
+    background-color: #b91d25;
+
+    transform: scale(1.02);
+}
+
+
+/* Botão indisponível */
+
+.informacoes-produto .indisponivel {
+    background-color: #3a414d;
+
+    color: #9da5b1;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.informacoes-produto .indisponivel:hover {
+    background-color: #3a414d;
+
+    transform: none;
+}
+
+
+/* Rodapé */
+
+footer {
+    background-color: #071a36;
+
+    border-top: 2px solid #26344d;
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #b8c2d1;
+}
+
+footer p {
+    margin: 5px;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 800px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 20px;
+
+        padding: 20px;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    .titulo h2 {
+        font-size: 26px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    main {
+        width: 94%;
+    }
+
+    .logo-area h1 {
+        font-size: 23px;
+    }
+
+    .imagem-produto {
+        height: 230px;
+    }
+
+}
+

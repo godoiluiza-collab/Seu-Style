@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido Confirmado - Seu Style</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #080b12;
+            color: white;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+        }
+
+        .caixa {
+            background-color: #111722;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #26344d;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            color: #e3262e;
+            margin-bottom: 15px;
+        }
+
+        .mensagem {
+            color: #cfd3da;
+            margin-bottom: 30px;
+        }
+
+        .pedido {
+            text-align: left;
+            border-top: 1px solid #26344d;
+            padding-top: 20px;
+        }
+
+        .produto {
+            padding: 12px 0;
+            border-bottom: 1px solid #26344d;
+        }
+
+        .produto p {
+            margin: 5px 0;
+            color: #cfd3da;
+        }
+
+        .produto strong {
+            color: white;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .total h2 {
+            color: #e3262e;
+        }
+
+        .botao {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 22px;
+            background-color: #d71920;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .botao:hover {
+            background-color: #a90f15;
+            transform: scale(1.03);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="caixa">
+
+            <h1>✅ Pedido Confirmado!</h1>
+
+<p class="mensagem">
+    Obrigado pela sua compra, {{ nome }}!
+</p>
+
+<p class="mensagem">
+    Pedido nº <strong>#{{ pedido_id }}</strong>
+</p>
+
+            <div class="pedido">
+
+                {% for produto in carrinho %}
+
+                    <div class="produto">
+
+                        <p>
+                            <strong>{{ produto.nome }}</strong>
+                        </p>
+
+                        <p>
+                            Quantidade:
+                            {{ produto.quantidade }}
+                        </p>
+
+                        <p>
+                            Subtotal:
+                            R$ {{ "%.2f"|format(produto.subtotal) }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+                <div class="total">
+
+                    <h2>
+                        Total:
+                        R$ {{ "%.2f"|format(total) }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <a class="botao" href="/">
+                🏠 Voltar para a loja
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+

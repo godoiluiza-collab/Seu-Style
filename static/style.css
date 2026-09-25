@@ -10,94 +10,207 @@ body {
     color: white;
 }
 
-/* Cabeçalho */
+
+/* =========================
+   CABEÇALHO
+========================= */
+
 header {
     background-color: #071a36;
-    border-bottom: 4px solid #d71920;
-    color: white;
 
-    padding: 22px 50px;
+    border-bottom: 4px solid #d71920;
+
+    padding: 15px 45px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     box-shadow: 0 4px 15px rgba(215, 25, 32, 0.35);
+
+    min-height: 90px;
 }
 
-header h1 {
-    font-size: 32px;
+
+/* Área da logo */
+
+.logo-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* Logo */
+
+.logo-area img {
+    width: 70px;
+    height: 70px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+}
+
+
+/* Efeito na logo */
+
+.logo-area img:hover {
+    transform: scale(1.08) rotate(-2deg);
+}
+
+
+/* Nome */
+
+.logo-area h1 {
+    font-size: 30px;
+
     letter-spacing: 2px;
+
+    color: white;
+}
+
+
+/* Frase abaixo do nome */
+
+.logo-area p {
+    color: #d71920;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-top: 4px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
 }
 
 nav a {
     color: white;
+
     text-decoration: none;
-    margin-left: 25px;
-    font-size: 16px;
+
+    padding: 10px 12px;
+
+    font-size: 15px;
+
     font-weight: bold;
+
+    border-radius: 6px;
+
+    transition: 0.3s;
 }
 
 nav a:hover {
-    color: #e3262e;
+    background-color: #d71920;
+
+    transform: translateY(-2px);
 }
 
-/* Título */
+
+/* =========================
+   TÍTULO
+========================= */
+
 .titulo {
     text-align: center;
-    margin: 50px 0 35px;
+
+    margin: 55px 0 35px;
 }
 
 .titulo h2 {
-    font-size: 34px;
+    font-size: 36px;
+
     color: #e3262e;
-    margin-bottom: 10px;
+
+    margin-bottom: 12px;
+
     text-transform: uppercase;
 }
 
 .titulo p {
     color: #cfd3da;
+
     font-size: 17px;
 }
 
-/* Produtos */
+
+/* =========================
+   PRODUTOS
+========================= */
+
 .produtos {
     display: flex;
+
     justify-content: center;
+
     flex-wrap: wrap;
+
     gap: 30px;
 
-    padding: 20px 50px 60px;
+    padding: 20px 50px 70px;
 }
 
-/* Card */
+
+/* =========================
+   CARD DO PRODUTO
+========================= */
+
 .produto {
     background-color: #111722;
 
     width: 250px;
+
     padding: 20px;
 
     border: 1px solid #26344d;
+
     border-radius: 12px;
 
     text-align: center;
 
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
-    transition: 0.3s;
+    transition: 0.4s;
 }
+
+
+/* Efeito do card */
 
 .produto:hover {
-    transform: translateY(-7px);
+    transform: translateY(-8px) scale(1.02);
 
-    border-color: #d71920;
+    border-color: #e3262e;
 
-    box-shadow: 0 8px 25px rgba(215, 25, 32, 0.35);
+    box-shadow:
+        0 8px 25px rgba(215, 25, 32, 0.4);
 }
 
-/* Imagem */
+
+/* =========================
+   IMAGEM
+========================= */
+
 .produto img {
     width: 100%;
+
     height: 250px;
 
     object-fit: cover;
@@ -105,9 +218,30 @@ nav a:hover {
     border-radius: 8px;
 
     border: 2px solid #1c355c;
+
+    transition: 0.4s;
+
+    cursor: pointer;
 }
 
-/* Nome */
+
+/* Efeito da imagem */
+
+.produto img:hover {
+    transform: scale(1.05);
+
+    border-color: #e3262e;
+
+    box-shadow:
+        0 0 10px #e3262e,
+        0 0 20px #071a36;
+}
+
+
+/* =========================
+   NOME DO PRODUTO
+========================= */
+
 .produto h3 {
     margin: 15px 0 8px;
 
@@ -116,17 +250,39 @@ nav a:hover {
     font-size: 19px;
 }
 
-/* Preço */
+
+/* =========================
+   PREÇO
+========================= */
+
 .preco {
     color: #e3262e;
 
     font-size: 21px;
+
     font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   ESTOQUE
+========================= */
+
+.estoque-home {
+    color: #d8dce3;
+
+    font-size: 14px;
 
     margin-bottom: 15px;
 }
 
-/* Botões */
+
+/* =========================
+   BOTÕES
+========================= */
+
 button {
     background-color: #d71920;
 
@@ -134,17 +290,19 @@ button {
 
     border: none;
 
-    padding: 11px 22px;
+    padding: 11px 25px;
 
     border-radius: 6px;
 
     cursor: pointer;
 
     font-size: 15px;
+
     font-weight: bold;
 
     transition: 0.2s;
 }
+
 
 button:hover {
     background-color: #a90f15;
@@ -152,113 +310,190 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Carrinho */
-.carrinho {
-    width: 80%;
-    max-width: 800px;
 
-    margin: 35px auto;
+/* Botão indisponível */
 
-    background-color: #111722;
+button.indisponivel {
+    background-color: #555;
 
-    padding: 30px;
+    cursor: not-allowed;
 
-    border-radius: 12px;
-
-    border: 1px solid #26344d;
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
 }
 
-.item-carrinho {
-    border-bottom: 1px solid #26344d;
+button.indisponivel:hover {
+    background-color: #555;
 
-    padding: 20px 0;
+    transform: none;
 }
 
-.total {
-    text-align: right;
 
-    font-size: 23px;
+/* =========================
+   RODAPÉ
+========================= */
 
+footer {
+    background-color: #071a36;
+
+    border-top: 2px solid #d71920;
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #cfd3da;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 20px;
+
+        padding: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .logo-area img {
+        width: 60px;
+
+        height: 60px;
+    }
+
+    .logo-area h1 {
+        font-size: 24px;
+    }
+
+    .titulo h2 {
+        font-size: 27px;
+    }
+
+    .produtos {
+        padding: 20px;
+    }
+
+}
+
+/* =========================
+   MELHORIAS DA PÁGINA INICIAL
+========================= */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-area img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.logo-area h1 {
+    margin: 0;
+}
+
+.logo-area p {
+    color: #d71920;
+    font-size: 12px;
     font-weight: bold;
+    margin-top: 4px;
+}
 
+
+/* Categoria do produto */
+
+.categoria {
+    color: #8d96a5;
+    font-size: 13px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+
+/* Informações */
+
+.informacoes-produto {
+    margin-top: 5px;
+}
+
+
+/* Produto disponível */
+
+.disponivel {
+    color: #4caf50;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+
+/* Produto esgotado */
+
+.esgotado {
     color: #e3262e;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+
+/* Botão indisponível */
+
+.indisponivel {
+    background-color: #444 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
+.indisponivel:hover {
+    background-color: #444 !important;
+    transform: none !important;
+}
+
+
+/* Imagem */
+
+.imagem-produto {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+
+/* Rodapé */
+
+footer {
+    background-color: #071a36;
+    border-top: 2px solid #d71920;
+
+    text-align: center;
+
+    padding: 25px;
 
     margin-top: 20px;
-}
 
-/* Área do carrinho */
-body:has(.carrinho) {
-    background-color: #080b12;
-}
+    color: #cfd3da;
 
-.carrinho {
-    background-color: #111722;
-    color: white;
-    border: 1px solid #26344d;
-}
+    font-size: 13px;
 
-/* Textos dentro do carrinho */
-.carrinho h1,
-.carrinho h2,
-.carrinho h3,
-.carrinho p {
-    color: white;
-}
-
-/* Nome dos produtos */
-.item-carrinho h2,
-.item-carrinho h3 {
-    color: #e3262e;
-}
-
-/* Separação dos produtos */
-.item-carrinho {
-    border-bottom: 1px solid #26344d;
-}
-
-/* Total */
-.total {
-    color: #e3262e;
-}
-
-/* Links do carrinho */
-.carrinho a {
-    color: white;
-    text-decoration: none;
-}
-
-.carrinho a:hover {
-    color: #e3262e;
-}
-/* Efeito interativo nas imagens */
-.produto img {
-    transition: 0.4s;
-    cursor: pointer;
-}
-
-/* Quando passar o mouse na imagem */
-.produto img:hover {
-    transform: scale(1.08);
-    border-color: #e3262e;
-
-    box-shadow:
-        0 0 10px #e3262e,
-        0 0 20px #071a36;
-}
-
-/* Efeito no card inteiro */
-.produto {
-    transition: 0.4s;
-}
-
-/* Quando passar o mouse no card */
-.produto:hover {
-    transform: translateY(-8px) scale(1.02);
-
-    border-color: #e3262e;
-
-    box-shadow:
-        0 8px 20px rgba(215, 25, 32, 0.4);
+    line-height: 1.8;
 }

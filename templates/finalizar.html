@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Pedido - Seu Style</title>
+
+```
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #080b12;
+        color: white;
+        padding: 30px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #e3262e;
+        font-size: 34px;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .caixa {
+        background-color: #111722;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        border: 1px solid #26344d;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .caixa h2 {
+        color: #e3262e;
+        margin-bottom: 20px;
+    }
+
+    .produto {
+        border-bottom: 1px solid #26344d;
+        padding: 15px 0;
+    }
+
+    .produto:last-child {
+        border-bottom: none;
+    }
+
+    .produto p {
+        color: #cfd3da;
+        margin: 6px 0;
+    }
+
+    .produto strong {
+        color: white;
+    }
+
+    .total {
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .total h2 {
+        color: #e3262e;
+    }
+
+    .desconto {
+        color: #4caf50;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .economia {
+        color: #4caf50;
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .botao {
+        display: inline-block;
+        padding: 12px 20px;
+        margin: 5px;
+        background-color: #d71920;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .botao:hover {
+        background-color: #a90f15;
+        transform: scale(1.03);
+    }
+
+    .botoes {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .voltar {
+        background-color: #071a36;
+        border: 1px solid #26344d;
+    }
+
+    .voltar:hover {
+        background-color: #d71920;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<h1>🛍️ Finalizar Pedido</h1>
+
+<div class="container">
+
+    <div class="caixa">
+
+        <h2>Resumo do Pedido</h2>
+
+        {% for produto in carrinho %}
+
+            <div class="produto">
+
+                <p>
+                    <strong>{{ produto.nome }}</strong>
+                </p>
+
+                <p>
+                    Quantidade:
+                    {{ produto.quantidade }}
+                </p>
+
+                <p>
+                    Subtotal:
+                    R$ {{ "%.2f"|format(produto.subtotal) }}
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+        <div class="total">
+
+            {% if desconto > 0 %}
+
+                <p class="desconto">
+                    ⭐ Desconto de fidelidade:
+                    {{ desconto }}%
+                </p>
+
+                <p class="economia">
+                    💰 Você economizou:
+                    R$ {{ "%.2f"|format(valor_desconto) }}
+                </p>
+
+                <h2>
+                    Total:
+                    R$ {{ "%.2f"|format(total - valor_desconto) }}
+                </h2>
+
+            {% else %}
+
+                <h2>
+                    Total:
+                    R$ {{ "%.2f"|format(total) }}
+                </h2>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="caixa">
+
+        <h2>Dados do Cliente</h2>
+
+        <p>
+            Para finalizar o pedido, confirme seus dados.
+        </p>
+
+        <div class="botoes">
+
+            <a class="botao" href="/cadastro">
+                👤 Cadastrar Cliente
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="botoes">
+
+        <a class="botao voltar" href="/carrinho">
+            ← Voltar para o Carrinho
+        </a>
+
+    </div>
+
+</div>
+```
+
+</body>
+
+</html>

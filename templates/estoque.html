@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Estoque - Seu Style</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #080b12;
+            color: white;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e3262e;
+            font-size: 34px;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* INDICADORES */
+
+        .indicadores {
+            max-width: 1100px;
+            margin: 0 auto 35px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .indicador {
+            background-color: #111722;
+            border: 1px solid #26344d;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .indicador-icone {
+            font-size: 30px;
+        }
+
+        .indicador p {
+            color: #cfd3da;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .indicador strong {
+            color: #e3262e;
+            font-size: 26px;
+        }
+
+        /* GRAFICOS */
+
+        .painel-graficos {
+            max-width: 1100px;
+            margin: 0 auto 40px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .grafico {
+            background-color: #111722;
+            border: 1px solid #26344d;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .grafico h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        .grafico-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* ESTOQUE */
+
+        .estoque {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .produto {
+            background-color: #111722;
+            padding: 22px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            border: 1px solid #26344d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .produto:hover {
+            transform: translateY(-3px);
+            border-color: #d71920;
+            box-shadow: 0 8px 20px rgba(215, 25, 32, 0.25);
+        }
+
+        .produto h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .produto p {
+            color: #cfd3da;
+            margin: 9px 0;
+            font-size: 15px;
+        }
+
+        .produto p strong {
+            color: #e3262e;
+        }
+
+        .quantidade {
+            font-size: 18px !important;
+            margin-top: 15px !important;
+        }
+
+        .baixo {
+            color: #e3262e;
+            font-weight: bold;
+            background-color: rgba(215, 25, 32, 0.12);
+            padding: 5px 9px;
+            border-radius: 5px;
+        }
+
+        .normal {
+            color: #4caf50;
+            font-weight: bold;
+            background-color: rgba(76, 175, 80, 0.10);
+            padding: 5px 9px;
+            border-radius: 5px;
+        }
+
+        /* BOTÕES DO ESTOQUE */
+
+        .controle-estoque {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .controle-estoque span {
+            min-width: 50px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .botao-quantidade {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background-color: #d71920;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 22px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .botao-quantidade:hover {
+            background-color: #a90f15;
+            transform: scale(1.05);
+        }
+
+        /* BOTÃO VOLTAR */
+
+        .botao {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #071a36;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid #26344d;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .botao:hover {
+            background-color: #d71920;
+            border-color: #d71920;
+            transform: scale(1.03);
+        }
+
+        .voltar {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 900px) {
+
+            .indicadores {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .painel-graficos {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .indicadores {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📦 Gerenciamento de Estoque</h1>
+
+
+    <!-- INDICADORES -->
+
+    <div class="indicadores">
+
+        <div class="indicador">
+            <div class="indicador-icone">📦</div>
+
+            <div>
+                <p>Produtos cadastrados</p>
+                <strong>{{ total_produtos }}</strong>
+            </div>
+        </div>
+
+
+        <div class="indicador">
+            <div class="indicador-icone">🏷️</div>
+
+            <div>
+                <p>Unidades em estoque</p>
+                <strong>{{ total_estoque }}</strong>
+            </div>
+        </div>
+
+
+        <div class="indicador">
+            <div class="indicador-icone">🛒</div>
+
+            <div>
+                <p>Unidades vendidas</p>
+                <strong>{{ total_vendidos }}</strong>
+            </div>
+        </div>
+
+
+        <div class="indicador">
+            <div class="indicador-icone">⚠️</div>
+
+            <div>
+                <p>Estoque baixo</p>
+                <strong>{{ estoque_baixo }}</strong>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- GRAFICOS -->
+
+    <div class="painel-graficos">
+
+        <!-- PRODUTOS MAIS VENDIDOS -->
+
+        <div class="grafico">
+
+            <h2>📊 Produtos mais vendidos</h2>
+
+            <div class="grafico-container">
+
+                <canvas id="graficoVendas"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ESTOQUE ATUAL -->
+
+        <div class="grafico">
+
+            <h2>📦 Estoque atual</h2>
+
+            <div class="grafico-container">
+
+                <canvas id="graficoEstoque"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LISTA DE PRODUTOS -->
+
+    <div class="estoque">
+
+        {% for produto in produtos %}
+
+        <div class="produto">
+
+            <h2>{{ produto.nome }}</h2>
+
+            <p>
+                <strong>Categoria:</strong>
+                {{ produto.categoria }}
+            </p>
+
+            <p>
+                <strong>Preço:</strong>
+                R$ {{ "%.2f"|format(produto.preco) }}
+            </p>
+
+            <p class="quantidade">
+
+                <strong>Quantidade em estoque:</strong>
+
+                {% if produto.estoque <= 2 %}
+
+                <span class="baixo">
+                    {{ produto.estoque }} unidades
+                </span>
+
+                {% else %}
+
+                <span class="normal">
+                    {{ produto.estoque }} unidades
+                </span>
+
+                {% endif %}
+
+            </p>
+
+
+            <!-- CONTROLES -->
+
+            <div class="controle-estoque">
+
+                <a
+                    class="botao-quantidade"
+                    href="/diminuir-estoque/{{ produto.id }}">
+                    −
+                </a>
+
+                <span>
+                    {{ produto.estoque }}
+                </span>
+
+                <a
+                    class="botao-quantidade"
+                    href="/aumentar-estoque/{{ produto.id }}">
+                    +
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <!-- VOLTAR -->
+
+        <div class="voltar">
+
+            <a
+                class="botao"
+                href="/">
+                ← Voltar para a loja
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- DADOS DOS GRAFICOS -->
+<script>
+    const nomesVendas = [];
+
+    const quantidadesVendidas = [];
+
+    {% for venda in vendas %}
+        nomesVendas.push("{{ venda[0] }}");
+        quantidadesVendidas.push({{ venda[1] }});
+    {% endfor %}
+
+
+    const nomesEstoque = [];
+
+    const quantidadesEstoque = [];
+
+    {% for produto in estoque_grafico %}
+        nomesEstoque.push("{{ produto.nome }}");
+        quantidadesEstoque.push({{ produto.estoque }});
+    {% endfor %}
+
+
+    new Chart(document.getElementById("graficoVendas"), {
+        type: "bar",
+
+        data: {
+            labels: nomesVendas,
+
+            datasets: [{
+                label: "Unidades vendidas",
+
+                data: quantidadesVendidas
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+
+
+    new Chart(document.getElementById("graficoEstoque"), {
+        type: "bar",
+
+        data: {
+            labels: nomesEstoque,
+
+            datasets: [{
+                label: "Unidades em estoque",
+
+                data: quantidadesEstoque
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

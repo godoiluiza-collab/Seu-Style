@@ -1,103 +1,281 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <title>Clientes - Seu Style</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 30px;
-        }
+```
+<style>
 
-        h1 {
-            text-align: center;
-            color: #0b1f3a;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .clientes {
-            max-width: 900px;
-            margin: auto;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #080b12;
+        color: white;
+        padding: 30px;
+    }
 
-        .cliente {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px #ccc;
-        }
+    h1 {
+        text-align: center;
+        color: #e3262e;
+        font-size: 34px;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
-        .cliente h2 {
-            color: #0b1f3a;
-        }
+    .clientes {
+        max-width: 900px;
+        margin: auto;
+    }
 
-        .botao {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #0b1f3a;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+    .cliente {
+        background-color: #111722;
+        padding: 22px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+        border: 1px solid #26344d;
 
-        .botao:hover {
-            background-color: #163b6d;
-        }
+        box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.5);
 
-        .voltar {
-            text-align: center;
-            margin-top: 25px;
-        }
-    </style>
+        transition: 0.3s;
+    }
+
+    .cliente:hover {
+        transform: translateY(-3px);
+
+        border-color: #d71920;
+
+        box-shadow:
+            0 8px 20px rgba(215, 25, 32, 0.25);
+    }
+
+    .cliente h2 {
+        color: white;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    .cliente p {
+        color: #cfd3da;
+        margin: 9px 0;
+        font-size: 15px;
+    }
+
+    .cliente p strong {
+        color: #e3262e;
+    }
+
+    /* Fidelidade */
+
+    .fidelidade {
+        margin-top: 20px;
+        padding-top: 18px;
+        border-top: 1px solid #26344d;
+    }
+
+    .fidelidade h3 {
+        color: #e3262e;
+        margin-bottom: 12px;
+    }
+
+    .compras {
+        font-size: 17px;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .recompensa {
+        background-color: #071a36;
+        border: 1px solid #26344d;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 12px;
+    }
+
+    .recompensa p {
+        margin: 5px 0;
+        color: white;
+    }
+
+    .barra {
+        width: 100%;
+        height: 10px;
+        background-color: #26344d;
+        border-radius: 10px;
+        margin-top: 10px;
+        overflow: hidden;
+    }
+
+    .progresso {
+        height: 100%;
+        background-color: #e3262e;
+        border-radius: 10px;
+    }
+
+    .botao {
+        display: inline-block;
+        padding: 10px 18px;
+        background-color: #071a36;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        border: 1px solid #26344d;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .botao:hover {
+        background-color: #d71920;
+        border-color: #d71920;
+        transform: scale(1.03);
+    }
+
+    .voltar {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+</style>
+```
+
 </head>
 
 <body>
 
-    <h1>👥 Clientes Cadastrados</h1>
+```
+<h1>👥 Clientes Cadastrados</h1>
 
-    <div class="clientes">
+<div class="clientes">
 
-        {% if clientes %}
+    {% if clientes %}
 
-            {% for cliente in clientes %}
+        {% for cliente in clientes %}
 
-                <div class="cliente">
+            <div class="cliente">
 
-                    <h2>{{ cliente.nome }}</h2>
+                <h2>{{ cliente.nome }}</h2>
 
-                    <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+                <p>
+                    <strong>CPF:</strong>
+                    {{ cliente.cpf }}
+                </p>
 
-                    <p><strong>Email:</strong> {{ cliente.email }}</p>
+                <p>
+                    <strong>Email:</strong>
+                    {{ cliente.email }}
+                </p>
 
-                    <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+                <p>
+                    <strong>Telefone:</strong>
+                    {{ cliente.telefone }}
+                </p>
 
-                    <p><strong>Endereço:</strong> {{ cliente.endereco }}</p>
+                <p>
+                    <strong>Endereço:</strong>
+                    {{ cliente.endereco }}
+                </p>
+
+                <div class="fidelidade">
+
+                    <h3>⭐ Programa de Fidelidade</h3>
+
+                    <p class="compras">
+                        🛍️ Compras realizadas:
+                        <strong>{{ cliente.compras }}</strong>
+                    </p>
+
+                    {% if cliente.compras >= 10 %}
+
+                        <div class="recompensa">
+                            <p>👑 <strong>Cliente Especial!</strong></p>
+                            <p>🎁 Você ganhou um mimo!</p>
+                            <p>💰 15% de desconto na próxima compra.</p>
+                        </div>
+
+                    {% elif cliente.compras >= 7 %}
+
+                        <div class="recompensa">
+                            <p>🎉 Parabéns!</p>
+                            <p>🎁 Você ganhou um mimo!</p>
+                            <p>Continue comprando para ganhar novas recompensas.</p>
+                        </div>
+
+                    {% elif cliente.compras >= 5 %}
+
+                        <div class="recompensa">
+                            <p>⭐ Você ganhou <strong>10% de desconto!</strong></p>
+                            <p>Faltam {{ 7 - cliente.compras }} compras para ganhar um mimo.</p>
+
+                            <div class="barra">
+                                <div class="progresso"
+                                    style="width: {{ (cliente.compras / 7 * 100) }}%;">
+                                </div>
+                            </div>
+                        </div>
+
+                    {% elif cliente.compras >= 3 %}
+
+                        <div class="recompensa">
+                            <p>🎉 Você ganhou <strong>5% de desconto!</strong></p>
+                            <p>Faltam {{ 5 - cliente.compras }} compras para ganhar 10% de desconto.</p>
+
+                            <div class="barra">
+                                <div class="progresso"
+                                    style="width: {{ (cliente.compras / 5 * 100) }}%;">
+                                </div>
+                            </div>
+                        </div>
+
+                    {% else %}
+
+                        <div class="recompensa">
+                            <p>💙 Continue comprando para ganhar recompensas!</p>
+                            <p>Faltam {{ 3 - cliente.compras }} compras para ganhar 5% de desconto.</p>
+
+                            <div class="barra">
+                                <div class="progresso"
+                                    style="width: {{ (cliente.compras / 3 * 100) }}%;">
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
 
                 </div>
 
-            {% endfor %}
-
-        {% else %}
-
-            <div class="cliente">
-                <h2>Nenhum cliente cadastrado.</h2>
             </div>
 
-        {% endif %}
+        {% endfor %}
 
-        <div class="voltar">
+    {% else %}
 
-            <a class="botao" href="/">
-                ← Voltar para a loja
-            </a>
+        <div class="cliente">
+
+            <h2>Nenhum cliente cadastrado.</h2>
 
         </div>
 
+    {% endif %}
+
+    <div class="voltar">
+
+        <a class="botao" href="/">
+            ← Voltar para a loja
+        </a>
+
     </div>
+
+</div>
+```
 
 </body>
 

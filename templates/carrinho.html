@@ -6,74 +6,186 @@
     <title>Carrinho - Seu Style</title>
 
     <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
+            background-color: #080b12;
+            color: white;
             padding: 30px;
         }
 
+        /* Título */
+
         h1 {
             text-align: center;
-            color: #0b1f3a;
+            color: #e3262e;
+            font-size: 34px;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
+        /* Área do carrinho */
 
         .carrinho {
             max-width: 800px;
             margin: auto;
         }
 
+        /* Produto */
+
         .produto {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px #ccc;
+            background-color: #111722;
+            padding: 22px;
+            margin-bottom: 18px;
+
+            border-radius: 12px;
+
+            border: 1px solid #26344d;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.5);
+
+            transition: 0.3s;
         }
+
+        .produto:hover {
+            transform: translateY(-3px);
+
+            border-color: #d71920;
+
+            box-shadow:
+                0 8px 20px rgba(215, 25, 32, 0.25);
+        }
+
+        /* Nome do produto */
 
         .produto h2 {
-            color: #0b1f3a;
+            color: white;
+            margin-bottom: 12px;
         }
 
-        .quantidade {
-            margin-top: 15px;
+        /* Texto */
+
+        .produto p {
+            color: #cfd3da;
+            margin: 8px 0;
         }
+
+        /* Quantidade */
+
+        .quantidade {
+            margin-top: 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantidade strong {
+            color: white;
+        }
+
+        /* Botões */
 
         .botao {
             display: inline-block;
+
             padding: 8px 14px;
+
             margin: 5px;
-            background-color: #0b1f3a;
+
+            background-color: #d71920;
+
             color: white;
+
             text-decoration: none;
-            border-radius: 5px;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
         }
 
         .botao:hover {
-            background-color: #163b6d;
+            background-color: #a90f15;
+
+            transform: scale(1.05);
         }
 
+        /* Botão remover */
+
         .remover {
+            background-color: #8b1017;
+        }
+
+        .remover:hover {
             background-color: #b00020;
         }
 
+        /* Subtotal */
+
+        .produto p strong {
+            color: #e3262e;
+        }
+
+        /* Total */
+
         .total {
-            background-color: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
+            background-color: #111722;
+
+            padding: 22px;
+
+            margin-top: 25px;
+
+            border-radius: 12px;
+
+            border: 1px solid #26344d;
+
             text-align: right;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .total h2 {
-            color: #0b1f3a;
+            color: #e3262e;
+            font-size: 25px;
         }
+
+        /* Carrinho vazio */
+
+        .produto h2 {
+            color: white;
+        }
+
+        /* Voltar */
 
         .voltar {
             display: block;
+
             text-align: center;
-            margin-top: 25px;
+
+            margin-top: 30px;
         }
+
+        .voltar .botao {
+            background-color: #071a36;
+
+            border: 1px solid #26344d;
+        }
+
+        .voltar .botao:hover {
+            background-color: #d71920;
+        }
+
     </style>
 </head>
 
@@ -138,6 +250,14 @@
                 </h2>
 
             </div>
+
+            <div class="finalizar-pedido">
+
+    <a class="botao" href="/finalizar">
+        🛍️ Finalizar Pedido
+    </a>
+
+</div>
 
         {% else %}
 
